@@ -5,7 +5,7 @@ using System.Net.Http.Headers;
 using System.Text;
 
 string token = string.Empty;
-string dominio = "https://localhost:7210";
+string dominio = "https://3stecnologia.eti.br/dataexportapi";
 
 Console.WriteLine(DateTime.Now);
 
@@ -15,7 +15,7 @@ try
     ValidaLogin validaLogin = new ValidaLogin()
     {
         Usuario = "_Usuario_Disponibilizado_",
-        Senha = "_Senha_Disponibilizada_"
+        Senha = "_Usuario_Disponibilizado_"
     };
 
     using (HttpClient client = new HttpClient())
@@ -31,6 +31,12 @@ try
         if (response != null)
         {
             string jsonString = await response.Content.ReadAsStringAsync();
+
+            if (jsonString.Contains("3S.1038"))
+            {
+                throw new Exception("3S.1038 - Usuário ou senha inválidos.");
+            }
+
             UserToken responseLogin = JsonConvert.DeserializeObject<UserToken>(jsonString);
 
             token = responseLogin.Token;
@@ -57,6 +63,7 @@ try
 
                 var responseListaVeiculos = JsonConvert.DeserializeObject<IEnumerable<ListaVeiculos>>(jsonString);
 
+                Console.WriteLine(responseListaVeiculos.ToList()[0].Frota);
             }
 
         }
