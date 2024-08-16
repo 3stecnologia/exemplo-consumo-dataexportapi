@@ -1,6 +1,6 @@
 ﻿namespace ConsoleAppTesteConsumoDataExportAPI
 {
-    public class ListaVeiculos
+    public class ListaVeiculosRetorno
     {
         public string? Frota { get; set; }
         public string? Placa { get; set; }

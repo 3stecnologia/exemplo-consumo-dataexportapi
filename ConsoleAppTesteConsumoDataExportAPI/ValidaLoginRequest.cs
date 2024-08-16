@@ -1,6 +1,6 @@
 ﻿namespace ConsoleAppTesteConsumoDataExportAPI
 {
-    public class ValidaLogin
+    public class ValidaLoginRequest
     {
         public string Usuario { get; set; }
 
